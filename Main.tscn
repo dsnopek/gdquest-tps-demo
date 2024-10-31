@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ccjru1onq2k2c"]
+[gd_scene load_steps=25 format=3 uid="uid://ccjru1onq2k2c"]
 
 [ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_3u7h6"]
 [ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_4bjxn"]
@@ -9,8 +9,6 @@
 [ext_resource type="Material" uid="uid://c5trc4hy86utg" path="res://Environment/Terrain/terrain_mat.tres" id="5_xal68"]
 [ext_resource type="Material" uid="uid://con3572kpt8a3" path="res://Environment/large_tree_trunk/large_tree_trunk_mat.tres" id="6_q3y6j"]
 [ext_resource type="PackedScene" uid="uid://dr8slkof1nc8r" path="res://Environment/trees/tree.tscn" id="7_rvx5i"]
-[ext_resource type="Shader" path="res://Environment/water/water_shader.gdshader" id="8_trepf"]
-[ext_resource type="Texture2D" uid="uid://ssrlnj65d4bs" path="res://Environment/water/textures/caustic_texture.png" id="9_8eqnd"]
 [ext_resource type="Script" path="res://Level/DeathPlane.gd" id="9_i1hvo"]
 [ext_resource type="PackedScene" uid="uid://dx8qkjcbt8emp" path="res://Environment/grass/GrassChunk.tscn" id="10_8c06q"]
 [ext_resource type="PackedScene" uid="uid://cn8o7sv1osssk" path="res://Environment/bushes/bush.tscn" id="11_f8df7"]
@@ -20,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://bi31qtqv1sf2s" path="res://Environment/flowers/flower_patch.tscn" id="15_jqya0"]
 [ext_resource type="PackedScene" uid="uid://cnj0t3ad178q6" path="res://DemoPage/DemoPage.tscn" id="16_qr75n"]
 [ext_resource type="AudioStream" uid="uid://bveh08m6w5ryf" path="res://Level/Music/mountain.mp3" id="17_mil5a"]
+[ext_resource type="PackedScene" uid="uid://bj1oi6cvl546j" path="res://XR/XRPlayer.tscn" id="21_nvvbd"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="22_njjkl"]
 
 [sub_resource type="Environment" id="Environment_allox"]
 background_mode = 2
@@ -30,30 +30,12 @@ reflected_light_source = 2
 tonemap_mode = 2
 tonemap_exposure = 0.9
 tonemap_white = 1.2
-ssao_enabled = true
 sdfgi_use_occlusion = true
-glow_enabled = true
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 volumetric_fog_emission = Color(1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_le7wx"]
-fractal_type = 0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_71o0d"]
-seamless = true
-noise = SubResource("FastNoiseLite_le7wx")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylhgr"]
-render_priority = -1
-shader = ExtResource("8_trepf")
-shader_parameter/water_color = Color(0.133333, 0.490196, 0.823529, 1)
-shader_parameter/water_depth_color = Color(0.164706, 0.537255, 0.901961, 1)
-shader_parameter/water_edge_distance = 0.4
-shader_parameter/water_depth_distance = 8.0
-shader_parameter/water_texture_scale = 40.0
-shader_parameter/main_noise_sampler = SubResource("NoiseTexture2D_71o0d")
-shader_parameter/caustic_sampler = ExtResource("9_8eqnd")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qif3w"]
+albedo_color = Color(0, 0.358366, 0.630258, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_eflel"]
 size = Vector2(300, 300)
@@ -375,7 +357,7 @@ skeleton = NodePath("../../..")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.12, -2, 7.71762)
-material_override = SubResource("ShaderMaterial_ylhgr")
+material_override = SubResource("StandardMaterial3D_qif3w")
 mesh = SubResource("PlaneMesh_eflel")
 
 [node name="DeathPlane" type="Area3D" parent="."]
@@ -1609,6 +1591,12 @@ skeleton = NodePath("../..")
 [node name="StageMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_mil5a")
 autoplay = true
+
+[node name="XRPlayer" parent="." instance=ExtResource("21_nvvbd")]
+transform = Transform3D(-0.961471, 0, 0.274908, 0, 1, 0, -0.274908, 0, -0.961471, 0.650056, 0.5, -16.9103)
+
+[node name="StartXR" parent="." instance=ExtResource("22_njjkl")]
+target_refresh_rate = 72.0
 
 [connection signal="weapon_switched" from="Player" to="weapon_switch_ui" method="switch_to"]
 

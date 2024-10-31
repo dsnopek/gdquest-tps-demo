@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj1oi6cvl546j"]
+
+[ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="1_135fk"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_fiyhi"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="2_mxund"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osx2"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.0337219, 0.241112, 0.863281, 0.497255)
+disable_receive_shadows = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_r7d7v"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="XRPlayer" type="XROrigin3D"]
+
+[node name="LeftController" type="XRController3D" parent="."]
+tracker = &"left_hand"
+
+[node name="FunctionTeleport" parent="LeftController" instance=ExtResource("1_135fk")]
+player_material = SubResource("StandardMaterial3D_6osx2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftController"]
+mesh = SubResource("BoxMesh_r7d7v")
+
+[node name="RightController" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="MovementTurn" parent="RightController" instance=ExtResource("2_mxund")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightController"]
+mesh = SubResource("BoxMesh_r7d7v")
+skeleton = NodePath("../../LeftController")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_fiyhi")]
