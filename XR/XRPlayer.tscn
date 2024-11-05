@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bj1oi6cvl546j"]
+[gd_scene load_steps=7 format=3 uid="uid://bj1oi6cvl546j"]
 
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="1_135fk"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_fiyhi"]
+[ext_resource type="PackedScene" uid="uid://dl7o8ekrtltw3" path="res://Player/model/gdbot-left-hand.glb" id="2_8rhli"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="2_mxund"]
+[ext_resource type="PackedScene" uid="uid://ithge85kar6c" path="res://Player/model/gdbot-right-hand.glb" id="4_pdpi4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osx2"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.0337219, 0.241112, 0.863281, 0.497255)
 disable_receive_shadows = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_r7d7v"]
-size = Vector3(0.1, 0.1, 0.1)
 
 [node name="XRPlayer" type="XROrigin3D"]
 
@@ -21,17 +20,16 @@ tracker = &"left_hand"
 [node name="FunctionTeleport" parent="LeftController" instance=ExtResource("1_135fk")]
 player_material = SubResource("StandardMaterial3D_6osx2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftController"]
-mesh = SubResource("BoxMesh_r7d7v")
+[node name="LeftHandModel" parent="LeftController" instance=ExtResource("2_8rhli")]
+transform = Transform3D(3.7749e-08, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, -0.5, -3.7749e-08, -1.65006e-15, 0.41571, -0.0322114, 0.291237)
 
 [node name="RightController" type="XRController3D" parent="."]
 tracker = &"right_hand"
 
 [node name="MovementTurn" parent="RightController" instance=ExtResource("2_mxund")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RightController"]
-mesh = SubResource("BoxMesh_r7d7v")
-skeleton = NodePath("../../LeftController")
+[node name="RightHandModel" parent="RightController" instance=ExtResource("4_pdpi4")]
+transform = Transform3D(3.7749e-08, 0.5, 2.18557e-08, 0, -2.18557e-08, 0.5, 0.5, -3.7749e-08, -1.65006e-15, -0.412445, -0.0309092, 0.291613)
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 

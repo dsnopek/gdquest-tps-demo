@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://38o2c8ta5wec"]
+
+[ext_resource type="Texture2D" uid="uid://dnh486bufsv1o" path="res://Player/model/textures/diffuse.png" id="1_keirv"]
+[ext_resource type="Texture2D" uid="uid://cq2mvk27vu7op" path="res://Player/model/textures/roughness.png" id="2_7pild"]
+[ext_resource type="Texture2D" uid="uid://wnmge42xts2r" path="res://Player/model/textures/normal.png" id="3_u32pv"]
+
+[resource]
+resource_name = "GdBotMat"
+cull_mode = 2
+albedo_texture = ExtResource("1_keirv")
+metallic_texture = ExtResource("2_7pild")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_7pild")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_u32pv")
