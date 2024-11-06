@@ -23,7 +23,7 @@ func spawn(coin_delay: float = 0.5) -> void:
 	apply_central_impulse(rand_pos)
 
 	# Delay time for player to be able to collect it
-	get_tree().create_timer(coin_delay).timeout.connect(set_collision_layer_value.bind(3, true))
+	get_tree().create_timer(coin_delay).timeout.connect(_player_detection_area.set_collision_mask_value.bind(4, true))
 	_player_detection_area.body_entered.connect(_on_body_entered)
 
 
