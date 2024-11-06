@@ -358,6 +358,7 @@ mesh = SubResource("PlaneMesh_eflel")
 
 [node name="DeathPlane" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+collision_mask = 9
 script = ExtResource("9_i1hvo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane"]

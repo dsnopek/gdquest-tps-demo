@@ -22,6 +22,8 @@ const BULLET_SCENE := preload("../Player/Bullet.tscn")
 @onready var coin_count_layer: Node3D = $CoinCountLayer
 @onready var _coin_count_layer_offset: Transform3D = coin_count_layer.transform
 
+@onready var _start_position: Transform3D = transform
+
 @onready var _shoot_cooldown_tick := shoot_cooldown
 @onready var _grenade_cooldown_tick := grenade_cooldown
 
@@ -65,3 +67,6 @@ func shoot() -> void:
 func collect_coin() -> void:
 	_coins += 1
 	%CoinLabel.text = "Coins:\n%d" % _coins
+
+func reset_position() -> void:
+	$PlayerBody.teleport(_start_position)
