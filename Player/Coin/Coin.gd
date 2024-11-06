@@ -53,7 +53,12 @@ func _on_body_entered(body: PhysicsBody3D) -> void:
 func _collect() -> void:
 	_collect_audio.pitch_scale = randfn(1.0, 0.1)
 	_collect_audio.play()
-	_target.collect_coin()
+	if _target is Player:
+		_target.collect_coin()
+	elif _target is XRToolsPlayerBody:
+		var xr_player = _target.get_parent()
+		if xr_player.has_method('collect_coin'):
+			xr_player.collect_coin()
 	hide()
 	await _collect_audio.finished
 	queue_free()

@@ -1342,23 +1342,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.821, 23.8633, -9.42108)
 
 [node name="GroundEnemy" parent="Foes" instance=ExtResource("14_tmmem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.425, 0.565421, -2.73277)
-coins_count = null
-stopping_distance = null
 
 [node name="GroundEnemy2" parent="Foes" instance=ExtResource("14_tmmem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.0059, 6.72432, -4.01509)
-coins_count = null
-stopping_distance = null
 
 [node name="GroundEnemy3" parent="Foes" instance=ExtResource("14_tmmem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.3509, 6.75317, 7.79975)
-coins_count = null
-stopping_distance = null
 
 [node name="GroundEnemy4" parent="Foes" instance=ExtResource("14_tmmem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.7016, 13.4851, 12.3918)
-coins_count = null
-stopping_distance = null
 
 [node name="Flowers" type="Node3D" parent="."]
 
