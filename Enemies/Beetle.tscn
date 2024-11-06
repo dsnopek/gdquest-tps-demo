@@ -106,9 +106,11 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 gravity_scale = 0.0
-continuous_cd = true
 lock_rotation = true
+continuous_cd = true
 script = ExtResource("1_mefon")
+coins_count = null
+stopping_distance = null
 
 [node name="ReactionLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8034, 0)

@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 					force.y = 0.5
 					force *= 10.0
 					collider.damage(impact_point, force)
+				if collider is Player or collider is XRToolsPlayerBody:
 					_beetle_skin.attack()
 
 
@@ -93,13 +94,13 @@ func damage(impact_point: Vector3, force: Vector3) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is Player:
+	if body is Player or body is XRToolsPlayerBody:
 		_target = body
 		_reaction_animation_player.play("found_player")
 
 
 func _on_body_exited(body: Node3D) -> void:
-	if body is Player:
+	if body is Player or body is XRToolsPlayerBody:
 		_target = null
 		_reaction_animation_player.play("lost_player")
 		_beetle_skin.idle()

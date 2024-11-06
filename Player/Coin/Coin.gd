@@ -46,7 +46,7 @@ func _follow(offset: float) -> void:
 
 
 func _on_body_entered(body: PhysicsBody3D) -> void:
-	if body is Player:
+	if body is Player or body is XRToolsPlayerBody:
 		set_target(body)
 
 

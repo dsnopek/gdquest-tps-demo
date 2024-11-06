@@ -30,12 +30,12 @@ func _physics_process(delta: float) -> void:
 	if _target != null and _alive:
 		var target_transform := transform.looking_at(_target.global_position)
 		transform = transform.interpolate_with(target_transform, 0.1)
-		
+
 		_shoot_count += delta
 		if _shoot_count > shoot_timer:
 			_bee_root.play_spit_attack()
 			_shoot_count -= shoot_timer
-			
+
 			var bullet := BULLET_SCENE.instantiate()
 			bullet.shooter = self
 			var origin := global_position
@@ -53,22 +53,22 @@ func damage(impact_point: Vector3, force: Vector3) -> void:
 
 	if not _alive:
 		return
-	
+
 	_defeat_sound.play()
 	_alive = false
-	
+
 	_flying_animation_player.stop()
 	_flying_animation_player.seek(0.0, true)
 	_detection_area.body_entered.disconnect(_on_body_entered)
 	_detection_area.body_exited.disconnect(_on_body_exited)
 	_target = null
 	_death_mesh_collider.set_deferred("disabled", false)
-	
+
 	gravity_scale = 1.0
 	_bee_root.play_poweroff()
-	
+
 	await get_tree().create_timer(2).timeout
-	
+
 	var puff := PUFF_SCENE.instantiate()
 	get_parent().add_child(puff)
 	puff.global_position = global_position
@@ -82,13 +82,13 @@ func damage(impact_point: Vector3, force: Vector3) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is Player:
+	if body is Player or body is XRToolsPlayerBody:
 		_shoot_count = 0.0
 		_target = body
 		_reaction_animation_player.play("found_player")
 
 
 func _on_body_exited(body: Node3D) -> void:
-	if body is Player:
+	if body is Player or body is XRToolsPlayerBody:
 		_target = null
 		_reaction_animation_player.play("lost_player")

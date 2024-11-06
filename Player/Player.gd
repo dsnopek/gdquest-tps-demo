@@ -61,12 +61,12 @@ func _ready() -> void:
 	_camera_controller.setup(self)
 	_grenade_aim_controller.visible = false
 	weapon_switched.emit(WEAPON_TYPE.keys()[0])
-	
+
 	# When copying this character to a new project, the project may lack required input actions.
 	# In that case, we register input actions for the user at runtime.
 	if not InputMap.has_action("move_left"):
 		_register_input_actions()
-	
+
 	_character_skin.stepped.connect(play_foot_step_sound)
 
 
