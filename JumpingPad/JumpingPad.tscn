@@ -8,6 +8,7 @@
 size = Vector3(1, 1.4, 1)
 
 [node name="JumpingPad" type="Area3D"]
+collision_mask = 8
 script = ExtResource("1_w7mtj")
 
 [node name="mushroom" parent="." instance=ExtResource("2_3e4pb")]

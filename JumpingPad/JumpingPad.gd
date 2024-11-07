@@ -5,8 +5,11 @@ extends Area3D
 
 func _ready() -> void:
 	body_entered.connect(func(body):
-		if body is Player:
-			body.velocity = (Vector3.UP * body.jump_initial_impulse) + (transform.basis * Vector3.UP * impulse_strength)
+		if body is Player or body is XRToolsPlayerBody:
+			if body is Player:
+				body.velocity = (Vector3.UP * body.jump_initial_impulse) + (transform.basis * Vector3.UP * impulse_strength)
+			elif body is XRToolsPlayerBody:
+				body.velocity = (Vector3.UP * 10.0) + (transform.basis * Vector3.UP * impulse_strength)
 
 			var tween := create_tween()
 			mushroom.scale.y = 0.4

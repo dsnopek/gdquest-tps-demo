@@ -78,7 +78,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 
 [node name="PlayerBody" parent="." instance=ExtResource("1_fiyhi")]
 collision_layer = 524296
+collision_mask = 3
 physics = SubResource("Resource_nl1nw")
+ground_control = 2
 
 [node name="CoinCountLayer" type="OpenXRCompositionLayerQuad" parent="." node_paths=PackedStringArray("layer_viewport")]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 0, 1, -1, 4.37114e-08, -4.37114e-08, -1.32349e-23, 0.0969628, 3.77482e-09)
