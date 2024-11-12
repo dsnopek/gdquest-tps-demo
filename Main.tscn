@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://ccjru1onq2k2c"]
+[gd_scene load_steps=25 format=3 uid="uid://ccjru1onq2k2c"]
 
 [ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_3u7h6"]
+[ext_resource type="Script" path="res://main.gd" id="1_eoy8k"]
 [ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_4bjxn"]
 [ext_resource type="PackedScene" uid="uid://7j15r0ej4fwx" path="res://JumpingPad/JumpingPad.tscn" id="3_w2mh2"]
 [ext_resource type="PackedScene" uid="uid://b602ttibxesgm" path="res://Level/Terrain.glb" id="4_vprlf"]
@@ -45,6 +46,7 @@ subdivide_depth = 30
 size = Vector3(130, 6, 130)
 
 [node name="Playground" type="Node3D"]
+script = ExtResource("1_eoy8k")
 
 [node name="weapon_switch_ui" parent="." instance=ExtResource("1_3u7h6")]
 anchors_preset = 2
@@ -1594,5 +1596,16 @@ transform = Transform3D(-0.961471, 0, 0.274908, 0, 1, 0, -0.274908, 0, -0.961471
 
 [node name="StartXR" parent="." instance=ExtResource("22_njjkl")]
 target_refresh_rate = 72.0
+
+[node name="BenchmarkingPositions" type="Node3D" parent="."]
+
+[node name="Marker1" type="Marker3D" parent="BenchmarkingPositions"]
+transform = Transform3D(-0.841123, 0, 0.540845, 0, 1, 0, -0.540845, 0, -0.841123, -5.08755, 2.67317, -7.00332)
+
+[node name="Marker2" type="Marker3D" parent="BenchmarkingPositions"]
+transform = Transform3D(-0.406682, 0, 0.91357, 0, 1, 0, -0.91357, 0, -0.406682, 7.16754, 6.19923, -9.88643)
+
+[node name="Marker3" type="Marker3D" parent="BenchmarkingPositions"]
+transform = Transform3D(0.144593, 0, 0.989492, 0, 1, 0, -0.989492, 0, 0.144593, -11.1047, 8.47847, 11.5761)
 
 [editable path="NavigationRegion3D/terrain_main_ground"]
