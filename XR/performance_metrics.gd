@@ -103,6 +103,14 @@ func _process(_delta: float) -> void:
 		_frame_time_estimated.update()
 
 func _on_timer_timeout() -> void:
-	%FrameTimeValue.text = "%.3f ms" % _frame_time_real.get_average()
-	%XRFrameTimeValue.text = "%.3f ms" % _frame_time_estimated.get_average()
-	%FPSValue.text = "%s" % Performance.get_monitor(Performance.TIME_FPS)
+	var metrics := get_metrics()
+	%FrameTimeValue.text = "%.3f ms" % metrics['frame_time_real']
+	%XRFrameTimeValue.text = "%.3f ms" % metrics['frame_time_estimated']
+	%FPSValue.text = "%s" % metrics['fps']
+
+func get_metrics() -> Dictionary:
+	return {
+		"frame_time_real": _frame_time_real.get_average(),
+		"frame_time_estimated": _frame_time_estimated.get_average(),
+		"fps": Performance.get_monitor(Performance.TIME_FPS),
+	}

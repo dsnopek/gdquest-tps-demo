@@ -11,6 +11,8 @@ const BULLET_SCENE = preload("../Player/Bullet.tscn")
 @export var grenade_cooldown := 0.5
 
 
+@onready var player_body: XRToolsPlayerBody = $PlayerBody
+
 @onready var left_controller: XRController3D = $LeftController
 @onready var right_controller: XRController3D = $RightController
 
@@ -95,4 +97,4 @@ func collect_coin() -> void:
 	%CoinLabel.text = "Coins:\n%d" % _coins
 
 func reset_position() -> void:
-	$PlayerBody.teleport(_start_position)
+	player_body.teleport(_start_position)

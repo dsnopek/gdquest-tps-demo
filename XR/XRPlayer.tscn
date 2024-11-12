@@ -38,9 +38,6 @@ bounce_threshold = 1.0
 
 [node name="XRPlayer" type="XROrigin3D"]
 script = ExtResource("1_3nv02")
-bullet_speed = null
-shoot_cooldown = null
-grenade_cooldown = null
 
 [node name="LeftController" type="XRController3D" parent="."]
 tracker = &"left_hand"
