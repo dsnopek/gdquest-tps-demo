@@ -4,7 +4,6 @@ const FORCE_BENCHMARKING := false
 
 func _ready() -> void:
 	if FORCE_BENCHMARKING or OS.has_feature("vr_benchmarking") or OS.get_cmdline_user_args().has('--vr-benchmarking'):
-		print("About to BENCH DRS")
 		do_vr_benchmarking()
 
 func do_vr_benchmarking() -> void:
