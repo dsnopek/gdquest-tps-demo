@@ -3,8 +3,6 @@ extends XROrigin3D
 
 const BULLET_SCENE = preload("../Player/Bullet.tscn")
 
-const CustomXRInterface = preload("custom_xr_interface.gd")
-
 ## Speed of shot bullets.
 @export var bullet_speed := 10.0
 ## Projectile cooldown
@@ -30,18 +28,10 @@ const CustomXRInterface = preload("custom_xr_interface.gd")
 @onready var _grenade_cooldown_tick := grenade_cooldown
 
 @onready var performance_metrics_layer: Node3D = $PerformanceMetricsLayer
+@onready var performance_metrics_layer_offset: Vector3 = $PerformanceMetricsLayer.position
 @onready var performance_metrics: Control = %PerformanceMetrics
 
 var _coins := 0
-var _custom_xr_interface: CustomXRInterface
-
-func _ready() -> void:
-	_custom_xr_interface = XRServer.find_interface("CustomXRInterface")
-	if not _custom_xr_interface:
-		_custom_xr_interface = CustomXRInterface.new()
-		XRServer.add_interface(_custom_xr_interface)
-	if not _custom_xr_interface.is_initialized():
-		_custom_xr_interface.initialize()
 
 func _on_left_controller_button_pressed(p_name:String) -> void:
 	if p_name == 'trigger_click':
@@ -63,8 +53,6 @@ func _on_right_controller_button_pressed(p_name: String) -> void:
 		if _shoot_cooldown_tick > shoot_cooldown:
 			_shoot_cooldown_tick = 0.0
 			shoot()
-	elif p_name == 'by_button':
-		XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
 func _on_right_controller_button_released(p_name: String) -> void:
 	pass
@@ -72,6 +60,22 @@ func _on_right_controller_button_released(p_name: String) -> void:
 func _process(_delta: float) -> void:
 	# Move the coin count layer to stay attached to the left controller.
 	coin_count_layer.transform = left_controller.transform * _coin_count_layer_offset
+
+	# Position the performance metrics layer.
+	if performance_metrics_layer.visible:
+		var camera: XRCamera3D = $XRCamera3D
+		var pos: Vector3 = performance_metrics_layer_offset
+		var camera_rotation: Vector3 = camera.transform.basis.get_euler()
+
+		pos = Basis().rotated(Vector3(0.0, 1.0, 0.0), camera_rotation.y) * pos
+		performance_metrics_layer.position = camera.position + pos
+
+		var dir: Vector3 = camera.position - performance_metrics_layer.position
+		dir.y = 0.0
+		dir = dir.normalized()
+
+		performance_metrics_layer.transform.basis = Basis.looking_at(dir, Vector3.UP, true)
+
 
 func _physics_process(p_delta: float) -> void:
 	_shoot_cooldown_tick += p_delta

@@ -1,30 +1,19 @@
 extends Control
 
-const SAMPLES_TO_AVERAGE := 72
+const SAMPLES_TO_AVERAGE := 100
 
 class Metric:
 	var samples := []
-
 	var callback: Callable
-	var label: Label
-	var units: String
-	var averaged: bool
 
-	func _init(p_callback: Callable, p_label: Label, p_units: String, p_averaged := true) -> void:
+	func _init(p_callback: Callable) -> void:
 		callback = p_callback
-		label = p_label
-		units = p_units
-		averaged = p_averaged
 
 	func clear() -> void:
 		samples.clear()
 
 	func update() -> void:
-		if averaged:
-			_add_sample(callback.call())
-		else:
-			samples = [ callback.call() ]
-		label.text = ("%.3f" % get_average()) + " " + units
+		_add_sample(callback.call())
 
 	func _add_sample(p_value: float) -> void:
 		samples.push_back(p_value)
@@ -32,13 +21,54 @@ class Metric:
 			samples.pop_front()
 
 	func get_average() -> float:
+		if samples.size() == 0:
+			return 0.0
 		var total: float = 0
 		for x in samples:
 			total += x
 		return total / samples.size()
 
+class CustomXRInterface extends XRInterfaceExtension:
+	var _previous_frame_ticks: int
+	var _frame_time: float
+
+	func _initialize() -> bool:
+		return true
+
+	func _is_initialized() -> bool:
+		return true
+
+	func _uninitialize() -> void:
+		pass
+
+	func _end_frame() -> void:
+		if _previous_frame_ticks == 0:
+			_previous_frame_ticks = Time.get_ticks_usec()
+		else:
+			var current_ticks := Time.get_ticks_usec()
+			_frame_time = float(current_ticks - _previous_frame_ticks) / 1000.0
+			_previous_frame_ticks = current_ticks
+
+	func get_frame_time() -> float:
+		return _frame_time
+
 var _viewport_rid: RID
-var _metrics: Array[Metric]
+
+var _frame_time_real := Metric.new(_get_frame_time_real)
+var _frame_time_estimated := Metric.new(_get_frame_time_estimated)
+var _custom_xr_interface: CustomXRInterface
+
+func _ready() -> void:
+	# Add our custom XR interface.
+	_custom_xr_interface = XRServer.find_interface("CustomXRInterface")
+	if not _custom_xr_interface:
+		_custom_xr_interface = CustomXRInterface.new()
+		XRServer.add_interface(_custom_xr_interface)
+	if not _custom_xr_interface.is_initialized():
+		_custom_xr_interface.initialize()
+
+	# For testing:
+	#set_viewport_rid(get_viewport().get_viewport_rid())
 
 func set_viewport_rid(p_viewport_rid: RID) -> void:
 	if _viewport_rid.is_valid():
@@ -49,30 +79,30 @@ func set_viewport_rid(p_viewport_rid: RID) -> void:
 	if _viewport_rid.is_valid():
 		RenderingServer.viewport_set_measure_render_time(_viewport_rid, true)
 
-	for metric in _metrics:
-		metric.clear()
+func _get_frame_time_real() -> float:
+	if RenderingServer.get_rendering_device():
+		# Only actually available on RD renderers.
+		return RenderingServer.viewport_get_measured_render_time_gpu(_viewport_rid) + RenderingServer.viewport_get_measured_render_time_cpu(_viewport_rid) + RenderingServer.get_frame_setup_time_cpu()
+	return 0.0
 
-func _get_cpu_time() -> float:
-	return RenderingServer.viewport_get_measured_render_time_cpu(_viewport_rid) + RenderingServer.get_frame_setup_time_cpu()
+func _get_frame_time_estimated() -> float:
+	if not _custom_xr_interface:
+		return 0.0
 
-func _get_gpu_time() -> float:
-	return RenderingServer.viewport_get_measured_render_time_gpu(_viewport_rid)
-
-func _get_total_time() -> float:
-	return _get_cpu_time() + _get_gpu_time()
+	# This can be bigger than what you'd expect from our FPS, but can't be lower.
+	# However, we don't have real frame time metrics on GLES, so this is an OK
+	# estimate.
+	return _custom_xr_interface.get_frame_time()
 
 func _get_fps() -> float:
 	return Performance.get_monitor(Performance.TIME_FPS)
 
-func _ready() -> void:
-	_metrics.push_back(Metric.new(_get_cpu_time, %CPURenderTimeValue, "ms"))
-	_metrics.push_back(Metric.new(_get_gpu_time, %GPURenderTimeValue, "ms"))
-	_metrics.push_back(Metric.new(_get_total_time, %TotalRenderTimeValue, "ms"))
-	_metrics.push_back(Metric.new(_get_fps, %FPSValue, "", false))
-
-	set_viewport_rid(get_viewport().get_viewport_rid())
-
 func _process(_delta: float) -> void:
 	if _viewport_rid.is_valid():
-		for metric in _metrics:
-			metric.update()
+		_frame_time_real.update()
+		_frame_time_estimated.update()
+
+func _on_timer_timeout() -> void:
+	%FrameTimeValue.text = "%.3f ms" % _frame_time_real.get_average()
+	%XRFrameTimeValue.text = "%.3f ms" % _frame_time_estimated.get_average()
+	%FPSValue.text = "%s" % Performance.get_monitor(Performance.TIME_FPS)

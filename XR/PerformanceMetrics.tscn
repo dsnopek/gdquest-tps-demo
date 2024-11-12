@@ -11,55 +11,59 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o6i7c")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="CPURenderTimeLabel" type="Label" parent="GridContainer"]
+[node name="FrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "CPU Render Time:"
+text = "Frame time (real - from renderer):"
 
-[node name="CPURenderTimeValue" type="Label" parent="GridContainer"]
+[node name="FrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "0ms"
+text = "0 ms"
 
-[node name="GPURenderTimeLabel" type="Label" parent="GridContainer"]
+[node name="XRFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "GPU Render Time:"
+text = "Frame time (estimated from XR system):"
 
-[node name="GPURenderTimeValue" type="Label" parent="GridContainer"]
+[node name="XRFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "0ms"
+text = "0 ms"
 
-[node name="TotalRenderTimeLabel" type="Label" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Total Render Time:"
-
-[node name="TotalRenderTimeValue" type="Label" parent="GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "0ms"
-
-[node name="FPSLabel" type="Label" parent="GridContainer"]
+[node name="FPSLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FPS:"
 
-[node name="FPSValue" type="Label" parent="GridContainer"]
+[node name="FPSValue" type="Label" parent="MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

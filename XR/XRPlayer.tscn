@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_x8ii4"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="5_u5e3i"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="7_nkwve"]
+[ext_resource type="LabelSettings" uid="uid://cohqiatkm7gr" path="res://XR/label_settings.tres" id="8_cyiju"]
 [ext_resource type="PackedScene" uid="uid://bdm34mjm5llly" path="res://XR/PerformanceMetrics.tscn" id="8_v602m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osx2"]
@@ -35,13 +36,11 @@ jump_velocity = 10.0
 bounciness = 0.0
 bounce_threshold = 1.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_21038"]
-font_size = 64
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
 [node name="XRPlayer" type="XROrigin3D"]
 script = ExtResource("1_3nv02")
+bullet_speed = null
+shoot_cooldown = null
+grenade_cooldown = null
 
 [node name="LeftController" type="XRController3D" parent="."]
 tracker = &"left_hand"
@@ -104,18 +103,19 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Coins:
 0"
-label_settings = SubResource("LabelSettings_21038")
+label_settings = ExtResource("8_cyiju")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PerformanceMetricsLayer" type="OpenXRCompositionLayerQuad" parent="." node_paths=PackedStringArray("layer_viewport")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465306, 0.15525, -1.46711)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.846)
 visible = false
 layer_viewport = NodePath("SubViewport")
-quad_size = Vector2(0.25, 0.25)
+quad_size = Vector2(0.25, 0.0625)
 
 [node name="SubViewport" type="SubViewport" parent="PerformanceMetricsLayer"]
 disable_3d = true
+size = Vector2i(512, 128)
 render_target_update_mode = 4
 
 [node name="PerformanceMetrics" parent="PerformanceMetricsLayer/SubViewport" instance=ExtResource("8_v602m")]
