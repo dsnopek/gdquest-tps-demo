@@ -15,6 +15,7 @@ func do_vr_benchmarking() -> void:
 	await get_tree().create_timer(2.0).timeout
 
 	# We use .set() in case we aren't using a version with the patch.
+	# See: https://github.com/godotengine/godot/pull/99145
 	XRServer.set('camera_locked_to_origin', true)
 	xr_player.performance_metrics_layer.visible = false
 	xr_player.performance_metrics.set_viewport_rid(get_viewport().get_viewport_rid())
