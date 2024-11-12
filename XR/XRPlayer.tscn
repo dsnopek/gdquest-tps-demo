@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj1oi6cvl546j"]
+[gd_scene load_steps=14 format=3 uid="uid://bj1oi6cvl546j"]
 
 [ext_resource type="Script" path="res://XR/xr_player.gd" id="1_3nv02"]
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="1_135fk"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_x8ii4"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="5_u5e3i"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="7_nkwve"]
+[ext_resource type="PackedScene" uid="uid://bdm34mjm5llly" path="res://XR/PerformanceMetrics.tscn" id="8_v602m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osx2"]
 transparency = 1
@@ -106,6 +107,19 @@ text = "Coins:
 label_settings = SubResource("LabelSettings_21038")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PerformanceMetricsLayer" type="OpenXRCompositionLayerQuad" parent="." node_paths=PackedStringArray("layer_viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465306, 0.15525, -1.46711)
+visible = false
+layer_viewport = NodePath("SubViewport")
+quad_size = Vector2(0.25, 0.25)
+
+[node name="SubViewport" type="SubViewport" parent="PerformanceMetricsLayer"]
+disable_3d = true
+render_target_update_mode = 4
+
+[node name="PerformanceMetrics" parent="PerformanceMetricsLayer/SubViewport" instance=ExtResource("8_v602m")]
+unique_name_in_owner = true
 
 [connection signal="button_pressed" from="LeftController" to="." method="_on_left_controller_button_pressed"]
 [connection signal="button_released" from="LeftController" to="." method="_on_left_controller_button_released"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://ccjru1onq2k2c"]
+[gd_scene load_steps=25 format=3 uid="uid://ccjru1onq2k2c"]
 
 [ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_3u7h6"]
+[ext_resource type="Script" path="res://main.gd" id="1_eoy8k"]
 [ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_4bjxn"]
 [ext_resource type="PackedScene" uid="uid://7j15r0ej4fwx" path="res://JumpingPad/JumpingPad.tscn" id="3_w2mh2"]
 [ext_resource type="PackedScene" uid="uid://b602ttibxesgm" path="res://Level/Terrain.glb" id="4_vprlf"]
@@ -45,6 +46,7 @@ subdivide_depth = 30
 size = Vector3(130, 6, 130)
 
 [node name="Playground" type="Node3D"]
+script = ExtResource("1_eoy8k")
 
 [node name="weapon_switch_ui" parent="." instance=ExtResource("1_3u7h6")]
 anchors_preset = 2
@@ -1594,5 +1596,8 @@ transform = Transform3D(-0.961471, 0, 0.274908, 0, 1, 0, -0.274908, 0, -0.961471
 
 [node name="StartXR" parent="." instance=ExtResource("22_njjkl")]
 target_refresh_rate = 72.0
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(-0.904764, 0, 0.425914, 0, 1, 0, -0.425914, 0, -0.904764, 3.80826, 2.67317, -11.3989)
 
 [editable path="NavigationRegion3D/terrain_main_ground"]
