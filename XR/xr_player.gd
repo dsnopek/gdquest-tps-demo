@@ -2,14 +2,16 @@ class_name XRPlayer
 extends XROrigin3D
 
 const BULLET_SCENE = preload("../Player/Bullet.tscn")
+const GRENADE_SCENE := preload("../Player/Grenade.tscn")
 
 ## Speed of shot bullets.
 @export var bullet_speed := 10.0
-## Projectile cooldown
+## Speed of shot grenades.
+@export var grenade_speed := 15.0
+### Projectile cooldown
 @export var shoot_cooldown := 0.5
 ## Grenade cooldown
 @export var grenade_cooldown := 0.5
-
 
 @onready var player_body: XRToolsPlayerBody = $PlayerBody
 
@@ -28,6 +30,7 @@ const BULLET_SCENE = preload("../Player/Bullet.tscn")
 
 @onready var _shoot_cooldown_tick := shoot_cooldown
 @onready var _grenade_cooldown_tick := grenade_cooldown
+@onready var _grenade_ready := false
 
 @onready var performance_metrics_layer: Node3D = $PerformanceMetricsLayer
 @onready var performance_metrics_layer_offset: Vector3 = $PerformanceMetricsLayer.position
@@ -55,9 +58,15 @@ func _on_right_controller_button_pressed(p_name: String) -> void:
 		if _shoot_cooldown_tick > shoot_cooldown:
 			_shoot_cooldown_tick = 0.0
 			shoot()
+	elif p_name == 'by_button':
+		_grenade_ready = true
 
 func _on_right_controller_button_released(p_name: String) -> void:
-	pass
+	if p_name == 'by_button':
+		if _grenade_ready and _grenade_cooldown_tick > grenade_cooldown:
+			_grenade_cooldown_tick = 0.0
+			launch_grenade()
+		_grenade_ready = false
 
 func _process(_delta: float) -> void:
 	# Move the coin count layer to stay attached to the left controller.
@@ -91,6 +100,13 @@ func shoot() -> void:
 	bullet.distance_limit = 14.0
 	get_parent().add_child(bullet)
 	bullet.global_position = bullet_spawn_point.global_position
+
+func launch_grenade() -> void:
+	var grenade: CharacterBody3D = GRENADE_SCENE.instantiate()
+	get_parent().add_child(grenade)
+	grenade.global_position = bullet_spawn_point.global_position
+	grenade.throw(-bullet_spawn_point.global_transform.basis.z * grenade_speed)
+	PhysicsServer3D.body_add_collision_exception(player_body.get_rid(), grenade.get_rid())
 
 func collect_coin() -> void:
 	_coins += 1
