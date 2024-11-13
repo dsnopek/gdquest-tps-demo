@@ -2,6 +2,8 @@ extends Node3D
 
 const FORCE_BENCHMARKING := false
 
+var _benchmarking_in_progress := false
+
 func _ready() -> void:
 	var auto_resume_demo_page := false
 
@@ -12,6 +14,12 @@ func _ready() -> void:
 		var player: Node3D = $Player
 		remove_child(player)
 		player.queue_free()
+
+		var xr_player: Node3D = $XRPlayer
+		xr_player.left_controller.button_pressed.connect(func (p_button):
+			if p_button == 'menu_button':
+				do_vr_benchmarking()
+		)
 	else:
 		var xr_player: Node3D = $XRPlayer
 		remove_child(xr_player)
@@ -25,6 +33,10 @@ func _ready() -> void:
 		$DemoPage.resume_demo()
 
 func do_vr_benchmarking() -> void:
+	if _benchmarking_in_progress:
+		return
+	_benchmarking_in_progress = true
+
 	var benchmarking_positions: Node3D = $BenchmarkingPositions
 	var xr_player: XROrigin3D = $XRPlayer
 
@@ -60,3 +72,5 @@ func do_vr_benchmarking() -> void:
 	xr_player.player_body.enabled = true
 	xr_player.reset_position()
 	xr_player.performance_metrics.set_viewport_rid(RID())
+
+	_benchmarking_in_progress = false
