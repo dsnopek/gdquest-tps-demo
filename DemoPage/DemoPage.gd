@@ -28,10 +28,6 @@ func _ready() -> void:
 	else:
 		change_instruction(INSTRUCTION_TYPES.KEYBOARD)
 
-	var xr_interface := XRServer.find_interface("OpenXR")
-	if xr_interface and xr_interface.is_initialized():
-		resume_demo()
-
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and not event.is_echo():

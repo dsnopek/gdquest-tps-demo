@@ -101,6 +101,8 @@ radius = 0.721485
 height = 2.65424
 
 [node name="Player" type="CharacterBody3D" groups=["damageables"]]
+collision_layer = 8
+collision_mask = 3
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true

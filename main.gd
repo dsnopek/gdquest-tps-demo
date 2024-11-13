@@ -3,8 +3,26 @@ extends Node3D
 const FORCE_BENCHMARKING := false
 
 func _ready() -> void:
+	var auto_resume_demo_page := false
+
+	var xr_interface := XRServer.find_interface("OpenXR")
+	if xr_interface and xr_interface.is_initialized():
+		auto_resume_demo_page = true
+
+		var player: Node3D = $Player
+		remove_child(player)
+		player.queue_free()
+	else:
+		var xr_player: Node3D = $XRPlayer
+		remove_child(xr_player)
+		xr_player.queue_free()
+
 	if FORCE_BENCHMARKING or OS.has_feature("vr_benchmarking") or OS.get_cmdline_user_args().has('--vr-benchmarking'):
 		do_vr_benchmarking()
+		auto_resume_demo_page = true
+
+	if auto_resume_demo_page:
+		$DemoPage.resume_demo()
 
 func do_vr_benchmarking() -> void:
 	var benchmarking_positions: Node3D = $BenchmarkingPositions
