@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://dxwddtcp4dl6f" path="res://Environment/Terrain/BakedTextures/large_trunk_roughness.png" id="3_6f050"]
 
 [resource]
-albedo_color = Color(0.756863, 0.756863, 0.756863, 1)
 albedo_texture = ExtResource("1_qjblx")
 roughness_texture = ExtResource("3_6f050")
 normal_enabled = true
