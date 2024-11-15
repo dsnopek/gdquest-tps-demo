@@ -3,7 +3,8 @@ extends Node3D
 const TRIPLANAR_TERRAIN_MATERIAL = preload("res://Environment/Terrain/terrain_mat.tres")
 const TRIPLANAR_LARGE_TRUNK_MATERIAL = preload("res://Environment/large_tree_trunk/large_tree_trunk_mat.tres")
 
-const BAKED_TERRAIN_MATERIAL = preload("res://Environment/Terrain/terrain_mat_baked.tres")
+#const BAKED_TERRAIN_MATERIAL = preload("res://Environment/Terrain/terrain_mat_baked.tres")
+const BAKED_TERRAIN_MATERIAL = preload("res://Environment/Terrain/terrain_mat_baked_4k.tres")
 const BAKED_PLANE_MATERAIL = preload("res://Environment/Terrain/plane_mat_baked.tres")
 const BAKED_LARGE_TRUNK_MATERIAL = preload("res://Environment/large_tree_trunk/large_tree_trunk_mat_baked.tres")
 
