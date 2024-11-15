@@ -54,8 +54,11 @@ class CustomXRInterface extends XRInterfaceExtension:
 
 var _viewport_rid: RID
 
-var _frame_time_real := Metric.new(_get_frame_time_real)
 var _frame_time_estimated := Metric.new(_get_frame_time_estimated)
+var _frame_time_gpu := Metric.new(_get_frame_time_gpu)
+var _frame_time_cpu := Metric.new(_get_frame_time_cpu)
+var _frame_time_total := Metric.new(_get_frame_time_total)
+var _process_time := Metric.new(_get_process_time)
 var _custom_xr_interface: CustomXRInterface
 
 func _ready() -> void:
@@ -79,12 +82,6 @@ func set_viewport_rid(p_viewport_rid: RID) -> void:
 	if _viewport_rid.is_valid():
 		RenderingServer.viewport_set_measure_render_time(_viewport_rid, true)
 
-func _get_frame_time_real() -> float:
-	if RenderingServer.get_rendering_device():
-		# Only actually available on RD renderers.
-		return RenderingServer.viewport_get_measured_render_time_gpu(_viewport_rid) + RenderingServer.viewport_get_measured_render_time_cpu(_viewport_rid) + RenderingServer.get_frame_setup_time_cpu()
-	return 0.0
-
 func _get_frame_time_estimated() -> float:
 	if not _custom_xr_interface:
 		return 0.0
@@ -94,23 +91,50 @@ func _get_frame_time_estimated() -> float:
 	# estimate.
 	return _custom_xr_interface.get_frame_time()
 
+func _get_frame_time_gpu() -> float:
+	if RenderingServer.get_rendering_device():
+		# Only actually available on RD renderers.
+		return RenderingServer.viewport_get_measured_render_time_gpu(_viewport_rid)
+	return 0.0
+
+func _get_frame_time_cpu() -> float:
+	if RenderingServer.get_rendering_device():
+		# Only actually available on RD renderers.
+		return RenderingServer.viewport_get_measured_render_time_cpu(_viewport_rid) + RenderingServer.get_frame_setup_time_cpu()
+	return 0.0
+
+func _get_frame_time_total() -> float:
+	return _get_frame_time_gpu() + _get_frame_time_cpu()
+
+func _get_process_time() -> float:
+	return Performance.get_monitor(Performance.TIME_PROCESS)
+
 func _get_fps() -> float:
 	return Performance.get_monitor(Performance.TIME_FPS)
 
 func _process(_delta: float) -> void:
 	if _viewport_rid.is_valid():
-		_frame_time_real.update()
 		_frame_time_estimated.update()
+		_frame_time_gpu.update()
+		_frame_time_cpu.update()
+		_frame_time_total.update()
+		_process_time.update()
 
 func _on_timer_timeout() -> void:
 	var metrics := get_metrics()
-	%FrameTimeValue.text = "%.3f ms" % metrics['frame_time_real']
 	%XRFrameTimeValue.text = "%.3f ms" % metrics['frame_time_estimated']
+	%GPUFrameTimeValue.text = "%.3f ms" % metrics['frame_time_gpu']
+	%CPUFrameTimeValue.text = "%.3f ms" % metrics['frame_time_cpu']
+	%TotalFrameTimeValue.text = "%.3f ms" % metrics['frame_time_total']
+	%ProcessTimeValue.text = "%.3f ms" % metrics['process_time']
 	%FPSValue.text = "%s" % metrics['fps']
 
 func get_metrics() -> Dictionary:
 	return {
-		"frame_time_real": _frame_time_real.get_average(),
 		"frame_time_estimated": _frame_time_estimated.get_average(),
+		"frame_time_gpu": _frame_time_gpu.get_average(),
+		"frame_time_cpu": _frame_time_cpu.get_average(),
+		"frame_time_total": _frame_time_total.get_average(),
+		"process_time": _process_time.get_average(),
 		"fps": Performance.get_monitor(Performance.TIME_FPS),
 	}

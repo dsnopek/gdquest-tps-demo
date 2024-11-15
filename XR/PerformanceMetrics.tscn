@@ -29,23 +29,56 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="FrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Frame time (real - from renderer):"
-
-[node name="FrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "0 ms"
-
 [node name="XRFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frame time (estimated from XR system):"
 
 [node name="XRFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 ms"
+
+[node name="GPUFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Frame time (GPU only - from renderer):"
+
+[node name="GPUFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 ms"
+
+[node name="CPUFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Frame time (CPU only - from renderer):"
+
+[node name="CPUFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 ms"
+
+[node name="TotalFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Frame time (total - from renderer):"
+
+[node name="TotalFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 ms"
+
+[node name="ProcessTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Process time:"
+
+[node name="ProcessTimeValue" type="Label" parent="MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
