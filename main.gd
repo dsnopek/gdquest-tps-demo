@@ -14,7 +14,7 @@ const FORCE_BENCHMARKING := false
 @onready var plane_mesh = $NavigationRegion3D/terrain_main_ground/Plane
 
 var _benchmarking_in_progress := false
-var _using_triplanar_materials := true
+var _using_triplanar_materials := false
 
 func _ready() -> void:
 	var auto_resume_demo_page := false
@@ -36,19 +36,14 @@ func _ready() -> void:
 		xr_player.left_controller.button_pressed.connect(func (p_button):
 			if p_button == 'grip_click':
 				_using_triplanar_materials = not _using_triplanar_materials
-				if _using_triplanar_materials:
-					terrain_mesh.material_override = TRIPLANAR_TERRAIN_MATERIAL
-					plane_mesh.material_override = TRIPLANAR_TERRAIN_MATERIAL
-					get_tree().set_group('large_trunk_material', 'material_override', TRIPLANAR_LARGE_TRUNK_MATERIAL)
-				else:
-					terrain_mesh.material_override = BAKED_TERRAIN_MATERIAL
-					plane_mesh.material_override = BAKED_PLANE_MATERAIL
-					get_tree().set_group('large_trunk_material', 'material_override', BAKED_LARGE_TRUNK_MATERIAL)
+				update_materials()
 		)
 	else:
 		var xr_player: Node3D = $XRPlayer
 		remove_child(xr_player)
 		xr_player.queue_free()
+
+	update_materials()
 
 	if FORCE_BENCHMARKING or OS.has_feature("vr_benchmarking") or OS.get_cmdline_user_args().has('--vr-benchmarking'):
 		do_vr_benchmarking()
@@ -56,6 +51,16 @@ func _ready() -> void:
 
 	if auto_resume_demo_page:
 		$DemoPage.resume_demo()
+
+func update_materials() -> void:
+	if _using_triplanar_materials:
+		terrain_mesh.material_override = TRIPLANAR_TERRAIN_MATERIAL
+		plane_mesh.material_override = TRIPLANAR_TERRAIN_MATERIAL
+		get_tree().set_group('large_trunk_material', 'material_override', TRIPLANAR_LARGE_TRUNK_MATERIAL)
+	else:
+		terrain_mesh.material_override = BAKED_TERRAIN_MATERIAL
+		plane_mesh.material_override = BAKED_PLANE_MATERAIL
+		get_tree().set_group('large_trunk_material', 'material_override', BAKED_LARGE_TRUNK_MATERIAL)
 
 func do_vr_benchmarking() -> void:
 	if _benchmarking_in_progress:
