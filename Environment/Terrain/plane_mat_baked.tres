@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ddcrnagkjllw2"]
+
+[ext_resource type="Texture2D" uid="uid://bvpoaunba0ijd" path="res://Environment/Terrain/BakedTextures/plane_diffuse.png" id="1_2g38a"]
+[ext_resource type="Texture2D" uid="uid://cg71sayqfo3di" path="res://Environment/Terrain/BakedTextures/plane_normal.png" id="2_t6utd"]
+[ext_resource type="Texture2D" uid="uid://dyhin3oxoq7lk" path="res://Environment/Terrain/BakedTextures/plane_roughness.png" id="3_ohsur"]
+
+[resource]
+albedo_texture = ExtResource("1_2g38a")
+roughness_texture = ExtResource("3_ohsur")
+normal_enabled = true
+normal_texture = ExtResource("2_t6utd")

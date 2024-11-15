@@ -1,8 +1,19 @@
 extends Node3D
 
+const TRIPLANAR_TERRAIN_MATERIAL = preload("res://Environment/Terrain/terrain_mat.tres")
+const TRIPLANAR_LARGE_TRUNK_MATERIAL = preload("res://Environment/large_tree_trunk/large_tree_trunk_mat.tres")
+
+const BAKED_TERRAIN_MATERIAL = preload("res://Environment/Terrain/terrain_mat_baked.tres")
+const BAKED_PLANE_MATERAIL = preload("res://Environment/Terrain/plane_mat_baked.tres")
+const BAKED_LARGE_TRUNK_MATERIAL = preload("res://Environment/large_tree_trunk/large_tree_trunk_mat_baked.tres")
+
 const FORCE_BENCHMARKING := false
 
+@onready var terrain_mesh = $NavigationRegion3D/terrain_main_ground/terrain
+@onready var plane_mesh = $NavigationRegion3D/terrain_main_ground/Plane
+
 var _benchmarking_in_progress := false
+var _using_triplanar_materials := true
 
 func _ready() -> void:
 	var auto_resume_demo_page := false
@@ -19,6 +30,19 @@ func _ready() -> void:
 		xr_player.left_controller.button_pressed.connect(func (p_button):
 			if p_button == 'menu_button':
 				do_vr_benchmarking()
+		)
+
+		xr_player.left_controller.button_pressed.connect(func (p_button):
+			if p_button == 'grip_click':
+				_using_triplanar_materials = not _using_triplanar_materials
+				if _using_triplanar_materials:
+					terrain_mesh.material_override = TRIPLANAR_TERRAIN_MATERIAL
+					plane_mesh.material_override = TRIPLANAR_TERRAIN_MATERIAL
+					get_tree().set_group('large_trunk_material', 'material_override', TRIPLANAR_LARGE_TRUNK_MATERIAL)
+				else:
+					terrain_mesh.material_override = BAKED_TERRAIN_MATERIAL
+					plane_mesh.material_override = BAKED_PLANE_MATERAIL
+					get_tree().set_group('large_trunk_material', 'material_override', BAKED_LARGE_TRUNK_MATERIAL)
 		)
 	else:
 		var xr_player: Node3D = $XRPlayer
