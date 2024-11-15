@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://7j15r0ej4fwx" path="res://JumpingPad/JumpingPad.tscn" id="3_w2mh2"]
 [ext_resource type="PackedScene" uid="uid://b602ttibxesgm" path="res://Level/Terrain.glb" id="4_vprlf"]
 [ext_resource type="NavigationMesh" uid="uid://d1ombvi6qufpk" path="res://Level/Main_navmesh.res" id="5_n4asa"]
-[ext_resource type="Material" uid="uid://con3572kpt8a3" path="res://Environment/large_tree_trunk/large_tree_trunk_mat.tres" id="6_q3y6j"]
 [ext_resource type="PackedScene" uid="uid://dr8slkof1nc8r" path="res://Environment/trees/tree.tscn" id="7_rvx5i"]
 [ext_resource type="Script" path="res://Level/DeathPlane.gd" id="9_i1hvo"]
 [ext_resource type="Material" uid="uid://ddcrnagkjllw2" path="res://Environment/Terrain/plane_mat_baked.tres" id="9_pl8m4"]
 [ext_resource type="Material" uid="uid://ng15cciqyhq2" path="res://Environment/Terrain/terrain_mat_baked.tres" id="10_04rm7"]
 [ext_resource type="PackedScene" uid="uid://dx8qkjcbt8emp" path="res://Environment/grass/GrassChunk.tscn" id="10_8c06q"]
 [ext_resource type="PackedScene" uid="uid://cn8o7sv1osssk" path="res://Environment/bushes/bush.tscn" id="11_f8df7"]
+[ext_resource type="Material" uid="uid://cvsyys1840ulq" path="res://Environment/large_tree_trunk/large_tree_trunk_mat_baked.tres" id="11_ftcjx"]
 [ext_resource type="PackedScene" uid="uid://cmwyiep10m4u4" path="res://Box/Box.tscn" id="12_xvr0j"]
 [ext_resource type="PackedScene" uid="uid://rn45gytkk6tv" path="res://Enemies/BeeBot.tscn" id="13_012dc"]
 [ext_resource type="PackedScene" uid="uid://oxyn25v5khuk" path="res://Enemies/Beetle.tscn" id="14_tmmem"]
@@ -90,69 +90,69 @@ metadata/_edit_lock_ = true
 
 [node name="terrain_main_ground" parent="NavigationRegion3D" instance=ExtResource("4_vprlf")]
 
-[node name="large_trunk" parent="NavigationRegion3D/terrain_main_ground" index="0"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_001" parent="NavigationRegion3D/terrain_main_ground" index="1"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_001" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_002" parent="NavigationRegion3D/terrain_main_ground" index="2"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_002" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_003" parent="NavigationRegion3D/terrain_main_ground" index="3"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_003" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_004" parent="NavigationRegion3D/terrain_main_ground" index="4"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_004" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_005" parent="NavigationRegion3D/terrain_main_ground" index="5"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_005" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_006" parent="NavigationRegion3D/terrain_main_ground" index="6"]
-material_override = ExtResource("6_q3y6j")
-
-[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_006" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="large_trunk_007" parent="NavigationRegion3D/terrain_main_ground" index="7"]
-material_override = ExtResource("6_q3y6j")
+[node name="large_trunk_007" parent="NavigationRegion3D/terrain_main_ground" index="0"]
+material_override = ExtResource("11_ftcjx")
 
 [node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_007" index="0"]
 collision_layer = 3
 collision_mask = 3
 
-[node name="Plane" parent="NavigationRegion3D/terrain_main_ground" index="8"]
+[node name="Plane" parent="NavigationRegion3D/terrain_main_ground" index="1"]
 material_override = ExtResource("9_pl8m4")
 
-[node name="terrain" parent="NavigationRegion3D/terrain_main_ground" index="9"]
+[node name="terrain" parent="NavigationRegion3D/terrain_main_ground" index="2"]
 material_override = ExtResource("10_04rm7")
 
 [node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/terrain" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk_006" parent="NavigationRegion3D/terrain_main_ground" index="3"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_006" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk_005" parent="NavigationRegion3D/terrain_main_ground" index="4"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_005" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk_003" parent="NavigationRegion3D/terrain_main_ground" index="5"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_003" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk_002" parent="NavigationRegion3D/terrain_main_ground" index="6"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_002" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk" parent="NavigationRegion3D/terrain_main_ground" index="7"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk_001" parent="NavigationRegion3D/terrain_main_ground" index="8"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_001" index="0"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="large_trunk_004" parent="NavigationRegion3D/terrain_main_ground" index="9"]
+material_override = ExtResource("11_ftcjx")
+
+[node name="StaticBody3D" parent="NavigationRegion3D/terrain_main_ground/large_trunk_004" index="0"]
 collision_layer = 3
 collision_mask = 3
 
