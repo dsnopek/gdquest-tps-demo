@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://dyhin3oxoq7lk" path="res://Environment/Terrain/BakedTextures/plane_roughness.png" id="3_ohsur"]
 
 [resource]
-albedo_color = Color(0.639216, 0.639216, 0.639216, 1)
 albedo_texture = ExtResource("1_2g38a")
 roughness_texture = ExtResource("3_ohsur")
 normal_enabled = true
