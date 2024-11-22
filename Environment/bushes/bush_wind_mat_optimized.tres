@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://djeg8t7yptaue"]
+
+[ext_resource type="Shader" uid="uid://d0bhcjkoxofr6" path="res://Environment/bushes/bush_wind_optimized.gdshader" id="1_kjxu7"]
+[ext_resource type="Texture2D" uid="uid://bkohv1qjq5s83" path="res://Environment/trees/simple_pine_leaves/simple_pin_leaves_albedo.png" id="2_j3jq1"]
+[ext_resource type="Texture2D" uid="uid://ctt3orpnvqw7" path="res://Environment/trees/simple_pine_leaves/simple_pin_leaves_normal.png" id="3_s7hyd"]
+[ext_resource type="Texture2D" uid="uid://b3j82svml7tsy" path="res://Environment/trees/simple_pine_leaves/simple_pin_leaves_orm.png" id="4_8j37h"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kjxu7")
+shader_parameter/albedo_sampler = ExtResource("2_j3jq1")
+shader_parameter/orm_sampler = ExtResource("4_8j37h")
+shader_parameter/normal_sampler = ExtResource("3_s7hyd")
+shader_parameter/wind_speed = 1.0
+shader_parameter/wind_strength = 2.0
