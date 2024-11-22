@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://ccjru1onq2k2c"]
+[gd_scene load_steps=28 format=3 uid="uid://ccjru1onq2k2c"]
 
 [ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_3u7h6"]
-[ext_resource type="Script" path="res://main.gd" id="1_eoy8k"]
+[ext_resource type="Script" uid="uid://dvbvkv4see6o5" path="res://main.gd" id="1_eoy8k"]
 [ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_4bjxn"]
 [ext_resource type="PackedScene" uid="uid://ciqrpd5675boy" path="res://Player/Player.tscn" id="2_q87gh"]
 [ext_resource type="PackedScene" uid="uid://7j15r0ej4fwx" path="res://JumpingPad/JumpingPad.tscn" id="3_w2mh2"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dr8slkof1nc8r" path="res://Environment/trees/tree.tscn" id="7_rvx5i"]
 [ext_resource type="Material" uid="uid://con3572kpt8a3" path="res://Environment/large_tree_trunk/large_tree_trunk_mat.tres" id="8_3fwya"]
 [ext_resource type="Material" uid="uid://c5trc4hy86utg" path="res://Environment/Terrain/terrain_mat.tres" id="9_chb2e"]
-[ext_resource type="Script" path="res://Level/DeathPlane.gd" id="9_i1hvo"]
+[ext_resource type="Script" uid="uid://cq5ckh1s1akk0" path="res://Level/DeathPlane.gd" id="9_i1hvo"]
 [ext_resource type="PackedScene" uid="uid://dx8qkjcbt8emp" path="res://Environment/grass/GrassChunk.tscn" id="10_8c06q"]
 [ext_resource type="PackedScene" uid="uid://cn8o7sv1osssk" path="res://Environment/bushes/bush.tscn" id="11_f8df7"]
 [ext_resource type="PackedScene" uid="uid://cmwyiep10m4u4" path="res://Box/Box.tscn" id="12_xvr0j"]
@@ -20,7 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://cnj0t3ad178q6" path="res://DemoPage/DemoPage.tscn" id="16_qr75n"]
 [ext_resource type="AudioStream" uid="uid://bveh08m6w5ryf" path="res://Level/Music/mountain.mp3" id="17_mil5a"]
 [ext_resource type="PackedScene" uid="uid://bj1oi6cvl546j" path="res://XR/XRPlayer.tscn" id="21_nvvbd"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="22_3b0ty"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="22_njjkl"]
+[ext_resource type="PackedScene" uid="uid://ngy13nu5toap" path="res://XR/xr_graphics_settings.tscn" id="23_bg4s2"]
 
 [sub_resource type="Environment" id="Environment_allox"]
 background_mode = 2
@@ -1600,6 +1602,11 @@ transform = Transform3D(-0.961471, 0, 0.274908, 0, 1, 0, -0.274908, 0, -0.961471
 
 [node name="StartXR" parent="." instance=ExtResource("22_njjkl")]
 target_refresh_rate = 72.0
+
+[node name="GraphicsSettingsViewport" parent="." instance=ExtResource("22_3b0ty")]
+transform = Transform3D(-0.999089, 0, -0.0426756, 0, 1, 0, 0.0426756, 0, -0.999089, 0, 2.33874, -13.5502)
+scene = ExtResource("23_bg4s2")
+scene_properties_keys = PackedStringArray("xr_graphics_settings.gd")
 
 [node name="BenchmarkingPositions" type="Node3D" parent="."]
 

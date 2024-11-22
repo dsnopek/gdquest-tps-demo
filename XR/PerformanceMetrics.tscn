@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdm34mjm5llly"]
 
-[ext_resource type="Script" path="res://XR/performance_metrics.gd" id="1_o6i7c"]
+[ext_resource type="Script" uid="uid://xiqjost68nws" path="res://XR/performance_metrics.gd" id="1_o6i7c"]
 
 [node name="PerformanceMetrics" type="Control"]
 layout_mode = 3

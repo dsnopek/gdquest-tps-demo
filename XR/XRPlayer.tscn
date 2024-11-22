@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://bj1oi6cvl546j"]
+[gd_scene load_steps=15 format=3 uid="uid://bj1oi6cvl546j"]
 
-[ext_resource type="Script" path="res://XR/xr_player.gd" id="1_3nv02"]
+[ext_resource type="Script" uid="uid://cpue1x28m2dw8" path="res://XR/xr_player.gd" id="1_3nv02"]
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="1_135fk"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_fiyhi"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="2_mxund"]
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_x8ii4"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="4_3etfn"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="5_u5e3i"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="7_nkwve"]
+[ext_resource type="Script" uid="uid://nqpgytcdoymc" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="7_nkwve"]
 [ext_resource type="PackedScene" uid="uid://bdm34mjm5llly" path="res://XR/PerformanceMetrics.tscn" id="8_v602m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osx2"]
@@ -52,6 +53,9 @@ strafe = true
 
 [node name="FunctionTeleport" parent="LeftController" instance=ExtResource("1_135fk")]
 player_material = SubResource("StandardMaterial3D_6osx2")
+
+[node name="FunctionPointer" parent="LeftController" instance=ExtResource("4_3etfn")]
+active_button_action = "ax_button"
 
 [node name="LeftHandMesh" type="MeshInstance3D" parent="LeftController"]
 unique_name_in_owner = true
