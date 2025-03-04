@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://ccjru1onq2k2c"]
 
 [ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_3u7h6"]
-[ext_resource type="Script" path="res://main.gd" id="1_eoy8k"]
+[ext_resource type="Script" uid="uid://xjrq1agsowgp" path="res://main.gd" id="1_eoy8k"]
 [ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_4bjxn"]
 [ext_resource type="PackedScene" uid="uid://ciqrpd5675boy" path="res://Player/Player.tscn" id="2_q87gh"]
 [ext_resource type="PackedScene" uid="uid://7j15r0ej4fwx" path="res://JumpingPad/JumpingPad.tscn" id="3_w2mh2"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dr8slkof1nc8r" path="res://Environment/trees/tree.tscn" id="7_rvx5i"]
 [ext_resource type="Material" uid="uid://con3572kpt8a3" path="res://Environment/large_tree_trunk/large_tree_trunk_mat.tres" id="8_3fwya"]
 [ext_resource type="Material" uid="uid://c5trc4hy86utg" path="res://Environment/Terrain/terrain_mat.tres" id="9_chb2e"]
-[ext_resource type="Script" path="res://Level/DeathPlane.gd" id="9_i1hvo"]
+[ext_resource type="Script" uid="uid://bivd5ht1qqrej" path="res://Level/DeathPlane.gd" id="9_i1hvo"]
 [ext_resource type="PackedScene" uid="uid://dx8qkjcbt8emp" path="res://Environment/grass/GrassChunk.tscn" id="10_8c06q"]
 [ext_resource type="PackedScene" uid="uid://cn8o7sv1osssk" path="res://Environment/bushes/bush.tscn" id="11_f8df7"]
 [ext_resource type="PackedScene" uid="uid://cmwyiep10m4u4" path="res://Box/Box.tscn" id="12_xvr0j"]
