@@ -14,6 +14,7 @@ const FORCE_BENCHMARKING := false
 @onready var plane_mesh = $NavigationRegion3D/terrain_main_ground/Plane
 
 var _benchmarking_in_progress := false
+var _quit_after_benchmarking := false
 var _using_triplanar_materials := false
 
 func _ready() -> void:
@@ -46,6 +47,7 @@ func _ready() -> void:
 	update_materials()
 
 	if FORCE_BENCHMARKING or OS.has_feature("vr_benchmarking") or OS.get_cmdline_user_args().has('--vr-benchmarking'):
+		_quit_after_benchmarking = true
 		do_vr_benchmarking()
 		auto_resume_demo_page = true
 
@@ -104,3 +106,7 @@ func do_vr_benchmarking() -> void:
 	xr_player.performance_metrics.set_viewport_rid(RID())
 
 	_benchmarking_in_progress = false
+
+	if _quit_after_benchmarking:
+		await get_tree().create_timer(1.0).timeout
+		get_tree().quit()
