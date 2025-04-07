@@ -24,10 +24,8 @@
 
 [sub_resource type="Environment" id="Environment_allox"]
 background_mode = 2
-background_color = Color(0.8, 0.913725, 1, 1)
+background_color = Color(0.529412, 0.8, 1, 1)
 sky = ExtResource("2_4bjxn")
-ambient_light_source = 3
-reflected_light_source = 2
 tonemap_mode = 2
 tonemap_exposure = 0.9
 tonemap_white = 1.2
