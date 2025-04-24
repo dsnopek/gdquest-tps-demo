@@ -28,6 +28,48 @@ class Metric:
 			total += x
 		return total / samples.size()
 
+	func get_median() -> float:
+		if samples.size() == 0:
+			return 0.0
+		var sorted = samples.duplicate()
+		sorted.sort()
+		var i = floor(sorted.size() / 2.0)
+		return sorted[i]
+
+	func get_min() -> float:
+		if samples.size() == 0:
+			return 0.0
+		return samples.min()
+
+	func get_max() -> float:
+		if samples.size() == 0:
+			return 0.0
+		return samples.max()
+
+	func get_standard_deviation() -> float:
+		if samples.size() == 0:
+			return 0.0
+		var mean := get_average()
+		var squared_diffs: Array = samples.map(func(v): return pow(v - mean, 2))
+		var variance: float = squared_diffs.reduce(func(a, v): return a + v, 0.0) / samples.size()
+		return sqrt(variance)
+
+	func get_margin_of_error(p_confidence: float = 1.96) -> float:
+		if samples.size() == 0:
+			return 0.0
+		var standard_deviation := get_standard_deviation()
+		return p_confidence * (standard_deviation / sqrt(samples.size()))
+
+	func get_all(p_confidence: float = 1.96) -> Dictionary:
+		return {
+			'average': get_average(),
+			'median': get_median(),
+			'min': get_min(),
+			'max': get_max(),
+			'standard_deviation': get_standard_deviation(),
+			'margin_of_error': get_margin_of_error(p_confidence),
+		}
+
 class CustomXRInterface extends XRInterfaceExtension:
 	var _previous_frame_ticks: int
 	var _frame_time: float
@@ -129,12 +171,12 @@ func _on_timer_timeout() -> void:
 	%ProcessTimeValue.text = "%.3f ms" % metrics['process_time']
 	%FPSValue.text = "%s" % metrics['fps']
 
-func get_metrics() -> Dictionary:
+func get_metrics(p_complex: bool = false) -> Dictionary:
 	return {
-		"frame_time_estimated": _frame_time_estimated.get_average(),
-		"frame_time_gpu": _frame_time_gpu.get_average(),
-		"frame_time_cpu": _frame_time_cpu.get_average(),
-		"frame_time_total": _frame_time_total.get_average(),
-		"process_time": _process_time.get_average(),
+		"frame_time_estimated": _frame_time_estimated.get_all() if p_complex else _frame_time_estimated.get_average(),
+		"frame_time_gpu": _frame_time_gpu.get_all() if p_complex else _frame_time_gpu.get_average(),
+		"frame_time_cpu": _frame_time_cpu.get_all() if p_complex else _frame_time_cpu.get_average(),
+		"frame_time_total": _frame_time_total.get_all() if p_complex else _frame_time_total.get_average(),
+		"process_time": _process_time.get_all() if p_complex else _process_time.get_average(),
 		"fps": Performance.get_monitor(Performance.TIME_FPS),
 	}

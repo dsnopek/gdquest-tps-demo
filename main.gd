@@ -9,6 +9,7 @@ const BAKED_PLANE_MATERAIL = preload("res://Environment/Terrain/plane_mat_baked.
 const BAKED_LARGE_TRUNK_MATERIAL = preload("res://Environment/large_tree_trunk/large_tree_trunk_mat_baked.tres")
 
 const FORCE_BENCHMARKING := false
+const USE_COMPLEX_METRICS := false
 
 @onready var terrain_mesh = $NavigationRegion3D/terrain_main_ground/terrain
 @onready var plane_mesh = $NavigationRegion3D/terrain_main_ground/Plane
@@ -88,7 +89,7 @@ func do_vr_benchmarking() -> void:
 		xr_player.global_transform = marker.global_transform
 		await get_tree().create_timer(5.0).timeout
 
-		metrics[marker.name] = xr_player.performance_metrics.get_metrics()
+		metrics[marker.name] = xr_player.performance_metrics.get_metrics(USE_COMPLEX_METRICS)
 
 	var rn: String = "vulkan" if RenderingServer.get_rendering_device() else "compatibility"
 	var fn: String = "user://metrics-%s.json" % rn
