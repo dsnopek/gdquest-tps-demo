@@ -15,7 +15,6 @@ const USE_COMPLEX_METRICS := false
 @onready var plane_mesh = $NavigationRegion3D/terrain_main_ground/Plane
 
 var _benchmarking_in_progress := false
-var _quit_after_benchmarking := false
 var _using_triplanar_materials := false
 
 func _ready() -> void:
@@ -48,8 +47,11 @@ func _ready() -> void:
 	update_materials()
 
 	if FORCE_BENCHMARKING or OS.has_feature("vr_benchmarking") or OS.get_cmdline_user_args().has('--vr-benchmarking'):
-		_quit_after_benchmarking = true
-		do_vr_benchmarking()
+		# The do_vr_benchmarking() has it's own 2.0 second wait, so this ends up with 15 seconds total
+		get_tree().create_timer(13.0).timeout.connect(func() :
+			await do_vr_benchmarking()
+			await do_vr_benchmarking(true)
+		)
 		auto_resume_demo_page = true
 
 	if auto_resume_demo_page:
@@ -65,7 +67,7 @@ func update_materials() -> void:
 		plane_mesh.material_override = BAKED_PLANE_MATERAIL
 		get_tree().set_group('large_trunk_material', 'material_override', BAKED_LARGE_TRUNK_MATERIAL)
 
-func do_vr_benchmarking() -> void:
+func do_vr_benchmarking(p_quit_after := false) -> void:
 	if _benchmarking_in_progress:
 		return
 	_benchmarking_in_progress = true
@@ -87,7 +89,7 @@ func do_vr_benchmarking() -> void:
 
 	for marker in benchmarking_positions.get_children():
 		xr_player.global_transform = marker.global_transform
-		await get_tree().create_timer(5.0).timeout
+		await get_tree().create_timer(15.0).timeout
 
 		metrics[marker.name] = xr_player.performance_metrics.get_metrics(USE_COMPLEX_METRICS)
 
@@ -108,6 +110,6 @@ func do_vr_benchmarking() -> void:
 
 	_benchmarking_in_progress = false
 
-	if _quit_after_benchmarking:
+	if p_quit_after:
 		await get_tree().create_timer(1.0).timeout
 		get_tree().quit()
