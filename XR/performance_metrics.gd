@@ -103,6 +103,8 @@ var _frame_time_total := Metric.new(_get_frame_time_total)
 var _process_time := Metric.new(_get_process_time)
 var _custom_xr_interface: CustomXRInterface
 
+var rs_metrics_enabled := true
+
 func _ready() -> void:
 	# Add our custom XR interface.
 	_custom_xr_interface = XRServer.find_interface("CustomXRInterface")
@@ -134,13 +136,13 @@ func _get_frame_time_estimated() -> float:
 	return _custom_xr_interface.get_frame_time()
 
 func _get_frame_time_gpu() -> float:
-	if RenderingServer.get_rendering_device():
+	if rs_metrics_enabled and _viewport_rid.is_valid() and RenderingServer.get_rendering_device():
 		# Only actually available on RD renderers.
 		return RenderingServer.viewport_get_measured_render_time_gpu(_viewport_rid)
 	return 0.0
 
 func _get_frame_time_cpu() -> float:
-	if RenderingServer.get_rendering_device():
+	if rs_metrics_enabled and _viewport_rid.is_valid() and RenderingServer.get_rendering_device():
 		# Only actually available on RD renderers.
 		return RenderingServer.viewport_get_measured_render_time_cpu(_viewport_rid) + RenderingServer.get_frame_setup_time_cpu()
 	return 0.0
@@ -155,12 +157,11 @@ func _get_fps() -> float:
 	return Performance.get_monitor(Performance.TIME_FPS)
 
 func _process(_delta: float) -> void:
-	if _viewport_rid.is_valid():
-		_frame_time_estimated.update()
-		_frame_time_gpu.update()
-		_frame_time_cpu.update()
-		_frame_time_total.update()
-		_process_time.update()
+	_frame_time_estimated.update()
+	_frame_time_gpu.update()
+	_frame_time_cpu.update()
+	_frame_time_total.update()
+	_process_time.update()
 
 func _on_timer_timeout() -> void:
 	var metrics := get_metrics()

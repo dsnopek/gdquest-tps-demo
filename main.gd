@@ -10,6 +10,7 @@ const BAKED_LARGE_TRUNK_MATERIAL = preload("res://Environment/large_tree_trunk/l
 
 const FORCE_BENCHMARKING := false
 const USE_COMPLEX_METRICS := false
+const USR_RS_METRICS := false
 
 @onready var terrain_mesh = $NavigationRegion3D/terrain_main_ground/terrain
 @onready var plane_mesh = $NavigationRegion3D/terrain_main_ground/Plane
@@ -39,6 +40,8 @@ func _ready() -> void:
 				_using_triplanar_materials = not _using_triplanar_materials
 				update_materials()
 		)
+
+		xr_player.performance_metrics.rs_metrics_enabled = USR_RS_METRICS
 	else:
 		var xr_player: Node3D = $XRPlayer
 		remove_child(xr_player)
