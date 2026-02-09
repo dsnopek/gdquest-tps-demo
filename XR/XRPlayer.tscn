@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bj1oi6cvl546j"]
+[gd_scene format=3 uid="uid://bj1oi6cvl546j"]
 
 [ext_resource type="Script" uid="uid://dicyxly0tboi4" path="res://XR/xr_player.gd" id="1_3nv02"]
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="1_135fk"]
@@ -25,77 +25,69 @@ height = 0.2
 
 [sub_resource type="Resource" id="Resource_nl1nw"]
 script = ExtResource("7_nkwve")
-flags = 0
-move_drag = 5.0
-move_traction = 30.0
-stop_on_slope = true
-move_max_slope = 45.0
-jump_max_slope = 45.0
 jump_velocity = 10.0
-bounciness = 0.0
-bounce_threshold = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_0v77j"]
 font_size = 64
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="XRPlayer" type="XROrigin3D"]
+[node name="XRPlayer" type="XROrigin3D" unique_id=750911994]
 script = ExtResource("1_3nv02")
 
-[node name="LeftController" type="XRController3D" parent="."]
+[node name="LeftController" type="XRController3D" parent="." unique_id=1770258956]
 tracker = &"left_hand"
 
-[node name="MovementDirect" parent="LeftController" instance=ExtResource("2_x8ii4")]
+[node name="MovementDirect" parent="LeftController" unique_id=264375022 instance=ExtResource("2_x8ii4")]
 max_speed = 6.0
 strafe = true
 
-[node name="FunctionTeleport" parent="LeftController" instance=ExtResource("1_135fk")]
+[node name="FunctionTeleport" parent="LeftController" unique_id=1574201103 instance=ExtResource("1_135fk")]
 player_material = SubResource("StandardMaterial3D_6osx2")
 
-[node name="LeftHandMesh" type="MeshInstance3D" parent="LeftController"]
+[node name="LeftHandMesh" type="MeshInstance3D" parent="LeftController" unique_id=1857766069]
 unique_name_in_owner = true
 mesh = SubResource("BoxMesh_r7d7v")
 
-[node name="RightController" type="XRController3D" parent="."]
+[node name="RightController" type="XRController3D" parent="." unique_id=625383411]
 tracker = &"right_hand"
 
-[node name="MovementTurn" parent="RightController" instance=ExtResource("2_mxund")]
+[node name="MovementTurn" parent="RightController" unique_id=1052606353 instance=ExtResource("2_mxund")]
 
-[node name="MovementJump" parent="RightController" instance=ExtResource("5_u5e3i")]
+[node name="MovementJump" parent="RightController" unique_id=230849872 instance=ExtResource("5_u5e3i")]
 jump_button_action = "ax_button"
 
-[node name="RightHandMesh" type="MeshInstance3D" parent="RightController"]
+[node name="RightHandMesh" type="MeshInstance3D" parent="RightController" unique_id=171947329]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_70q7v")
 skeleton = NodePath("../../LeftController")
 
-[node name="BulletSpawnPoint" type="Marker3D" parent="RightController/RightHandMesh"]
+[node name="BulletSpawnPoint" type="Marker3D" parent="RightController/RightHandMesh" unique_id=183655429]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293808, 1.28428e-08)
 
-[node name="XRCamera3D" type="XRCamera3D" parent="."]
+[node name="XRCamera3D" type="XRCamera3D" parent="." unique_id=1087816360]
 
-[node name="PlayerBody" parent="." instance=ExtResource("1_fiyhi")]
+[node name="PlayerBody" parent="." unique_id=716807937 instance=ExtResource("1_fiyhi")]
 collision_layer = 524296
 collision_mask = 3
 physics = SubResource("Resource_nl1nw")
 ground_control = 2
 
-[node name="CoinCountLayer" type="OpenXRCompositionLayerQuad" parent="." node_paths=PackedStringArray("layer_viewport")]
+[node name="CoinCountLayer" type="OpenXRCompositionLayerQuad" parent="." unique_id=1623684351 node_paths=PackedStringArray("layer_viewport")]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 0, 1, -1, 4.37114e-08, -4.37114e-08, -1.32349e-23, 0.0969628, 3.77482e-09)
 layer_viewport = NodePath("SubViewport")
 alpha_blend = true
 quad_size = Vector2(0.1, 0.1)
 
-[node name="SubViewport" type="SubViewport" parent="CoinCountLayer"]
+[node name="SubViewport" type="SubViewport" parent="CoinCountLayer" unique_id=499937864]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
-[node name="CoinLabel" type="Label" parent="CoinCountLayer/SubViewport"]
+[node name="CoinLabel" type="Label" parent="CoinCountLayer/SubViewport" unique_id=1370986727]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,18 +100,18 @@ label_settings = SubResource("LabelSettings_0v77j")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PerformanceMetricsLayer" type="OpenXRCompositionLayerQuad" parent="." node_paths=PackedStringArray("layer_viewport")]
+[node name="PerformanceMetricsLayer" type="OpenXRCompositionLayerQuad" parent="." unique_id=1262926363 node_paths=PackedStringArray("layer_viewport")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.846)
 visible = false
 layer_viewport = NodePath("SubViewport")
 quad_size = Vector2(0.25, 0.125)
 
-[node name="SubViewport" type="SubViewport" parent="PerformanceMetricsLayer"]
+[node name="SubViewport" type="SubViewport" parent="PerformanceMetricsLayer" unique_id=1975141496]
 disable_3d = true
 size = Vector2i(512, 256)
 render_target_update_mode = 4
 
-[node name="PerformanceMetrics" parent="PerformanceMetricsLayer/SubViewport" instance=ExtResource("8_v602m")]
+[node name="PerformanceMetrics" parent="PerformanceMetricsLayer/SubViewport" unique_id=606592688 instance=ExtResource("8_v602m")]
 unique_name_in_owner = true
 
 [connection signal="button_pressed" from="LeftController" to="." method="_on_left_controller_button_pressed"]

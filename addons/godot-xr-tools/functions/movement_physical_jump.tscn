@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckt118vcpmr6q"]
+[gd_scene format=3 uid="uid://ckt118vcpmr6q"]
 
 [ext_resource type="Script" uid="uid://cg0sbdypoy64u" path="res://addons/godot-xr-tools/functions/movement_physical_jump.gd" id="1"]
 
-[node name="MovementPhysicalJump" type="Node" groups=["movement_providers"]]
+[node name="MovementPhysicalJump" type="Node" unique_id=967796735 groups=["movement_providers"]]
 script = ExtResource("1")
 arms_jump_enable = true

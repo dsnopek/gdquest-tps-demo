@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://oxyn25v5khuk"]
+[gd_scene format=3 uid="uid://oxyn25v5khuk"]
 
 [ext_resource type="Script" uid="uid://cs661yew0v6i5" path="res://Enemies/Beetle.gd" id="1_mefon"]
 [ext_resource type="PackedScene" uid="uid://cxt8d0d4ift6" path="res://Enemies/beetle_bot/beetlebot_skin.tscn" id="2_1wpkj"]
@@ -101,7 +101,7 @@ radius = 0.489449
 [sub_resource type="BoxShape3D" id="BoxShape3D_bm81s"]
 size = Vector3(1.4, 0.2, 1.4)
 
-[node name="GroundEnemy" type="RigidBody3D" groups=["damageables", "targeteables"]]
+[node name="GroundEnemy" type="RigidBody3D" unique_id=1710523212 groups=["damageables", "targeteables"]]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -112,7 +112,7 @@ script = ExtResource("1_mefon")
 coins_count = null
 stopping_distance = null
 
-[node name="ReactionLabel" type="Label3D" parent="."]
+[node name="ReactionLabel" type="Label3D" parent="." unique_id=2071557737]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8034, 0)
 visible = false
 billboard = 2
@@ -120,38 +120,36 @@ text = "!"
 font_size = 192
 outline_size = 32
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ReactionLabel"]
-libraries = {
-"": SubResource("AnimationLibrary_sqtu2")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ReactionLabel" unique_id=912322472]
+libraries/ = SubResource("AnimationLibrary_sqtu2")
 
-[node name="PlayerDetectionArea" type="Area3D" parent="."]
+[node name="PlayerDetectionArea" type="Area3D" parent="." unique_id=1093925317]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=2138318223]
 shape = SubResource("SphereShape3D_h03f6")
 
-[node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeBody" type="CollisionShape3D" parent="." unique_id=1419572906]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.397976, -0.189352)
 shape = SubResource("CapsuleShape3D_g3iuo")
 
-[node name="CollisionShapeHead" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeHead" type="CollisionShape3D" parent="." unique_id=1653022602]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.561604, -0.382635)
 shape = SubResource("BoxShape3D_bm81s")
 
-[node name="DeathCollisionShape" type="CollisionShape3D" parent="."]
+[node name="DeathCollisionShape" type="CollisionShape3D" parent="." unique_id=539925316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0344099, -0.250324)
 shape = SubResource("BoxShape3D_bm81s")
 disabled = true
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1829636815]
 target_desired_distance = 0.1
 path_height_offset = 1.0
 
-[node name="DefeatSound" type="AudioStreamPlayer3D" parent="."]
+[node name="DefeatSound" type="AudioStreamPlayer3D" parent="." unique_id=413309291]
 stream = ExtResource("3_w5eam")
 volume_db = 1.0
 
-[node name="BeetlebotSkin" parent="." instance=ExtResource("2_1wpkj")]
+[node name="BeetlebotSkin" parent="." unique_id=953519433 instance=ExtResource("2_1wpkj")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)

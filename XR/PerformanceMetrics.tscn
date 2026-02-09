@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdm34mjm5llly"]
+[gd_scene format=3 uid="uid://bdm34mjm5llly"]
 
 [ext_resource type="Script" uid="uid://k3peuvncy3tn" path="res://XR/performance_metrics.gd" id="1_o6i7c"]
 
-[node name="PerformanceMetrics" type="Control"]
+[node name="PerformanceMetrics" type="Control" unique_id=475560198]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o6i7c")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1693305273]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,79 +23,79 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=1484732563]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="XRFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="XRFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer" unique_id=687082516]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frame time (estimated from XR system):"
 
-[node name="XRFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+[node name="XRFrameTimeValue" type="Label" parent="MarginContainer/GridContainer" unique_id=13745162]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0 ms"
 
-[node name="GPUFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="GPUFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer" unique_id=307846685]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frame time (GPU only - from renderer):"
 
-[node name="GPUFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+[node name="GPUFrameTimeValue" type="Label" parent="MarginContainer/GridContainer" unique_id=576518732]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0 ms"
 
-[node name="CPUFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="CPUFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer" unique_id=1121764332]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frame time (CPU only - from renderer):"
 
-[node name="CPUFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+[node name="CPUFrameTimeValue" type="Label" parent="MarginContainer/GridContainer" unique_id=612678998]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0 ms"
 
-[node name="TotalFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="TotalFrameTimeLabel" type="Label" parent="MarginContainer/GridContainer" unique_id=1799187223]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frame time (total - from renderer):"
 
-[node name="TotalFrameTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+[node name="TotalFrameTimeValue" type="Label" parent="MarginContainer/GridContainer" unique_id=1657375061]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0 ms"
 
-[node name="ProcessTimeLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="ProcessTimeLabel" type="Label" parent="MarginContainer/GridContainer" unique_id=728055573]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Process time:"
 
-[node name="ProcessTimeValue" type="Label" parent="MarginContainer/GridContainer"]
+[node name="ProcessTimeValue" type="Label" parent="MarginContainer/GridContainer" unique_id=1687747310]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0 ms"
 
-[node name="FPSLabel" type="Label" parent="MarginContainer/GridContainer"]
+[node name="FPSLabel" type="Label" parent="MarginContainer/GridContainer" unique_id=2074100034]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FPS:"
 
-[node name="FPSValue" type="Label" parent="MarginContainer/GridContainer"]
+[node name="FPSValue" type="Label" parent="MarginContainer/GridContainer" unique_id=1880423208]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=2043832950]
 wait_time = 0.5
 autostart = true
 

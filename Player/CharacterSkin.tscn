@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0mo8tek77du4"]
+[gd_scene format=3 uid="uid://c0mo8tek77du4"]
 
 [ext_resource type="Script" uid="uid://dxpvt0ylrkm36" path="res://Player/CharacterSkin.gd" id="2_cp6td"]
 [ext_resource type="PackedScene" uid="uid://db7wkegkjmixy" path="res://Player/model/gdbot.glb" id="2_v8h3f"]
@@ -2575,59 +2575,24 @@ _data = {
 &"simple_blink": ExtResource("4_5i6m7")
 }
 
-[node name="CharacterSkin" type="Node3D" node_paths=PackedStringArray("main_animation_player")]
+[node name="CharacterSkin" type="Node3D" unique_id=1936895991 node_paths=PackedStringArray("main_animation_player")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_cp6td")
 main_animation_player = NodePath("gdbot/AnimationPlayer")
 
-[node name="gdbot" parent="." instance=ExtResource("2_v8h3f")]
+[node name="gdbot" parent="." unique_id=1264338725 instance=ExtResource("2_v8h3f")]
 
-[node name="Skeleton3D" parent="gdbot/Armature" index="0"]
-bones/2/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/4/rotation = Quaternion(-0.115911, -2.57656e-08, 5.29041e-08, 0.99326)
-bones/5/rotation = Quaternion(0.198843, 5.30058e-08, -5.38571e-08, 0.980031)
-bones/7/rotation = Quaternion(-0.115911, 8.72134e-08, -6.00749e-08, 0.99326)
-bones/8/rotation = Quaternion(0.198843, -5.00951e-08, 6.82031e-08, 0.980031)
-bones/10/rotation = Quaternion(-0.505414, -0.494527, -0.494527, 0.505414)
-bones/11/rotation = Quaternion(-5.46012e-10, 2.14316e-08, -0.0279458, 0.999609)
-bones/13/rotation = Quaternion(0.0819346, 1.62373e-07, 6.18589e-09, 0.996638)
-bones/14/rotation = Quaternion(-0.0819346, 0, -1.95347e-08, 0.996638)
-bones/16/rotation = Quaternion(-0.505414, -0.494527, -0.494527, 0.505414)
-bones/17/rotation = Quaternion(-5.46012e-10, 2.14316e-08, -0.0279458, 0.999609)
-bones/19/rotation = Quaternion(-0.120361, -0.00802529, 0.000973064, 0.992697)
-bones/21/rotation = Quaternion(-0.116368, -0.124403, 0.0384288, 0.984635)
-bones/22/rotation = Quaternion(6.38189e-07, 6.45407e-07, -2.47732e-07, 1)
-bones/25/rotation = Quaternion(-0.116986, 0.0758535, -0.0455612, 0.989184)
-bones/26/rotation = Quaternion(8.61473e-09, -1.58325e-08, -7.35745e-08, 1)
-bones/29/rotation = Quaternion(-0.505414, -0.494527, -0.494527, 0.505414)
-bones/30/rotation = Quaternion(-5.46012e-10, 2.14316e-08, -0.0279458, 0.999609)
-bones/33/rotation = Quaternion(-0.505414, 0.494527, 0.494527, 0.505414)
-bones/34/rotation = Quaternion(2.08907e-10, 5.56092e-09, 0.0279458, 0.999609)
-bones/37/rotation = Quaternion(-0.505414, 0.494527, 0.494527, 0.505414)
-bones/38/rotation = Quaternion(2.08907e-10, 5.56092e-09, 0.0279458, 0.999609)
-bones/40/rotation = Quaternion(-0.120361, 0.00802529, -0.000973064, 0.992697)
-bones/42/rotation = Quaternion(-0.116368, 0.124403, -0.0384288, 0.984635)
-bones/43/rotation = Quaternion(6.37723e-07, -6.44941e-07, 2.47732e-07, 1)
-bones/46/rotation = Quaternion(-0.116986, -0.0758535, 0.0455612, 0.989184)
-bones/47/rotation = Quaternion(9.31322e-09, 1.67638e-08, 7.54371e-08, 1)
-bones/50/rotation = Quaternion(-0.505414, 0.494527, 0.494527, 0.505414)
-bones/51/rotation = Quaternion(2.08907e-10, 5.56092e-09, 0.0279458, 0.999609)
-bones/56/rotation = Quaternion(0, 0, 1, 0)
-bones/60/rotation = Quaternion(0, 0, 1, 0)
-
-[node name="gdbot_mesh" parent="gdbot/Armature/Skeleton3D" index="0"]
+[node name="gdbot_mesh" parent="gdbot/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1264338725, 343175646) index="0" unique_id=815499775]
 surface_material_override/1 = ExtResource("3_fvn82")
 surface_material_override/2 = ExtResource("3_oijnk")
 surface_material_override/3 = ExtResource("4_5srhf")
 
-[node name="AnimationPlayer" parent="gdbot" index="1"]
-libraries = {
-"": SubResource("AnimationLibrary_c1lpt"),
-"Godot Custom Animations": SubResource("AnimationLibrary_8q8s6")
-}
+[node name="AnimationPlayer" parent="gdbot" index="1" unique_id=1210673571]
+libraries/ = SubResource("AnimationLibrary_c1lpt")
+"libraries/Godot Custom Animations" = SubResource("AnimationLibrary_8q8s6")
 playback_default_blend_time = 0.1
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=265075502]
 root_node = NodePath("../gdbot")
 tree_root = ExtResource("3_hscum")
 anim_player = NodePath("../gdbot/AnimationPlayer")
@@ -2636,6 +2601,6 @@ parameters/Add2/add_amount = 1.0
 parameters/PunchOneShot/active = false
 parameters/PunchOneShot/internal_active = false
 parameters/PunchOneShot/request = 0
-parameters/StateMachine/move/blend_position = 0
+parameters/StateMachine/move/blend_position = 0.0
 
 [editable path="gdbot"]
