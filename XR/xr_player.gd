@@ -32,8 +32,7 @@ const GRENADE_SCENE := preload("../Player/Grenade.tscn")
 @onready var _grenade_cooldown_tick := grenade_cooldown
 @onready var _grenade_ready := false
 
-@onready var performance_metrics_layer: Node3D = $PerformanceMetricsLayer
-@onready var performance_metrics_layer_offset: Vector3 = $PerformanceMetricsLayer.position
+@onready var performance_metrics_layer: Node3D = %PerformanceMetricsLayer
 @onready var performance_metrics: Control = %PerformanceMetrics
 
 var _coins := 0
@@ -71,22 +70,6 @@ func _on_right_controller_button_released(p_name: String) -> void:
 func _process(_delta: float) -> void:
 	# Move the coin count layer to stay attached to the left controller.
 	coin_count_layer.transform = left_controller.transform * _coin_count_layer_offset
-
-	# Position the performance metrics layer.
-	if performance_metrics_layer.visible:
-		var camera: XRCamera3D = $XRCamera3D
-		var pos: Vector3 = performance_metrics_layer_offset
-		var camera_rotation: Vector3 = camera.transform.basis.get_euler()
-
-		pos = Basis().rotated(Vector3(0.0, 1.0, 0.0), camera_rotation.y) * pos
-		performance_metrics_layer.position = camera.position + pos
-
-		var dir: Vector3 = camera.position - performance_metrics_layer.position
-		dir.y = 0.0
-		dir = dir.normalized()
-
-		performance_metrics_layer.transform.basis = Basis.looking_at(dir, Vector3.UP, true)
-
 
 func _physics_process(p_delta: float) -> void:
 	_shoot_cooldown_tick += p_delta

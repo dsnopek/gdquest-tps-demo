@@ -69,6 +69,21 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 
 [node name="XRCamera3D" type="XRCamera3D" parent="." unique_id=1087816360]
 
+[node name="PerformanceMetricsLayer" type="OpenXRCompositionLayerQuad" parent="XRCamera3D" unique_id=1262926363 node_paths=PackedStringArray("layer_viewport")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.846)
+visible = false
+layer_viewport = NodePath("SubViewport")
+quad_size = Vector2(0.25, 0.125)
+
+[node name="SubViewport" type="SubViewport" parent="XRCamera3D/PerformanceMetricsLayer" unique_id=1975141496]
+disable_3d = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="PerformanceMetrics" parent="XRCamera3D/PerformanceMetricsLayer/SubViewport" unique_id=606592688 instance=ExtResource("8_v602m")]
+unique_name_in_owner = true
+
 [node name="PlayerBody" parent="." unique_id=716807937 instance=ExtResource("1_fiyhi")]
 collision_layer = 524296
 collision_mask = 3
@@ -99,20 +114,6 @@ text = "Coins:
 label_settings = SubResource("LabelSettings_0v77j")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="PerformanceMetricsLayer" type="OpenXRCompositionLayerQuad" parent="." unique_id=1262926363 node_paths=PackedStringArray("layer_viewport")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.846)
-visible = false
-layer_viewport = NodePath("SubViewport")
-quad_size = Vector2(0.25, 0.125)
-
-[node name="SubViewport" type="SubViewport" parent="PerformanceMetricsLayer" unique_id=1975141496]
-disable_3d = true
-size = Vector2i(512, 256)
-render_target_update_mode = 4
-
-[node name="PerformanceMetrics" parent="PerformanceMetricsLayer/SubViewport" unique_id=606592688 instance=ExtResource("8_v602m")]
-unique_name_in_owner = true
 
 [connection signal="button_pressed" from="LeftController" to="." method="_on_left_controller_button_pressed"]
 [connection signal="button_released" from="LeftController" to="." method="_on_left_controller_button_released"]
